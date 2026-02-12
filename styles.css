@@ -721,6 +721,67 @@ body::after {
   cursor: pointer;
 }
 
+/* ================= MOBILE OPTIMIZATION ================= */
+
+@media (max-width: 768px) {
+
+  section {
+    padding: 90px 6%;
+  }
+
+  .content-box {
+    padding: 30px 20px;
+  }
+
+  h1 {
+    font-size: 26px;
+  }
+
+  .subtitle {
+    font-size: 15px;
+  }
+
+  .projects-grid,
+  .cert-grid {
+    grid-template-columns: 1fr;
+  }
+
+  nav ul {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  nav ul li {
+    margin: 5px;
+  }
+
+  .social-icons a {
+    font-size: 18px;
+  }
+
+  .resume-btn {
+    font-size: 14px;
+    padding: 8px 14px;
+  }
+
+}
+
+button, a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button {
+  min-height: 40px;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+}
+
+body {
+  overflow-x: hidden;
+}
 
 
 
