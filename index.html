@@ -1,285 +1,432 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Akash A | Cybersecurity Researcher</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Akash A | Cybersecurity Researcher</title>
 
-<link rel="stylesheet" href="styles.css">
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600&family=Source+Code+Pro:wght@400;500&display=swap" rel="stylesheet">
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Share+Tech+Mono&family=Rajdhani:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/style.css" />
 </head>
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
-
-
 <body>
-  <canvas id="networkCanvas"></canvas>
-  <div id="chat-panel">
-  <div id="chat-header">Cyber AI Assistant</div>
-  <div id="chat-messages"></div>
-  <input type="text" id="chat-input" placeholder="Ask something..." />
-</div>
 
-  <div id="three-container"></div>
-  <div class="page-wipe"></div>
-  <div class="radar-container">
-  <div class="radar-circle"></div>
-  <div class="radar-sweep"></div>
-</div>
-<div id="ai-assistant">AI</div>
+  <!-- Custom Cursor -->
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
 
-<div id="intro-screen">
-  <h1>ACCESSING SECURE SYSTEM...</h1>
-</div>
-  <div id="scroll-progress"></div>
+  <!-- Background Canvas -->
+  <canvas id="bg-canvas"></canvas>
 
-  <audio id="bg-sound" loop>
-  <source src="cyber.mp3" type="audio/mpeg">
-</audio>
+  <!-- Scanlines overlay (CSS only) -->
 
+  <!-- NAVIGATION -->
+  <nav id="navbar">
+    <div class="nav-logo">AK<span>//</span>SEC</div>
+    <ul class="nav-links">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#certifications">Certs</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <div class="nav-status">
+      <div class="status-dot"></div>
+      SYSTEM_ONLINE
+    </div>
+    <button class="nav-toggle" id="navToggle"><i class="fas fa-bars"></i></button>
+  </nav>
 
-<canvas id="matrixCanvas"></canvas>
-
-<nav>
-  <ul>
-    <li><a href="#home">Home</a></li>
-    <li><a href="#about">About</a></li>
-    <li><a href="#services">Services</a></li>
-    <li><a href="#skills">Skills</a></li>
-    <li><a href="#projects">Projects</a></li>
-    <li><a href="#experience">Experience</a></li>
-    <li><a href="#contact">Contact</a></li>
-  </ul>
-</nav>
-
-<!-- HOME -->
-<section id="home">
-  <div class="content-box center parallax-container">
-    <div class="parallax-layer">
-
-      <h1 class="glow">Akash A</h1>
-      <p class="subtitle">Cybersecurity Researcher</p>
-
-      <!-- Social Icons -->
-      <div class="social-icons">
-        <a href="mailto:akashanoo124@gmail.com" target="_blank">
-          <i class="fas fa-envelope"></i>
-        </a>
-
-        <a href="https://instagram.com/ak4sh.a" target="_blank">
-          <i class="fab fa-instagram"></i>
-        </a>
-
-        <a href="https://github.com/akash-a124" target="_blank">
-          <i class="fab fa-github"></i>
-        </a>
-
-        <a href="https://www.linkedin.com/in/akash-a-820640370" target="_blank">
-          <i class="fab fa-linkedin"></i>
+  <!-- HERO -->
+  <section id="home">
+    <div class="hero-inner">
+      <p class="hero-pre">&gt; INITIATING_PROFILE.EXE <span class="blink">_</span></p>
+      <h1 class="hero-name">
+        <span class="line1">AKASH</span>
+        <span class="line2 outline">A</span>
+      </h1>
+      <p class="hero-role">[ CYBERSECURITY_RESEARCHER <span>//</span> PENETRATION_TESTER ]</p>
+      <p class="hero-desc">
+        Protecting digital frontiers through advanced threat analysis, penetration testing,
+        and security architecture. Operating in the space between breaches and defenses.
+      </p>
+      <div class="hero-social">
+        <a href="mailto:akashanoo124@gmail.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a>
+        <a href="https://instagram.com/ak4sh.a" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="https://github.com/akash-a124" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+        <a href="https://www.linkedin.com/in/akash-a-820640370" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+      </div>
+      <div class="hero-cta">
+        <a href="#projects" class="btn-primary">View Projects</a>
+        <a href="assets/resume/AKASH.A resume.pdf" target="_blank" class="btn-secondary">
+          <i class="fas fa-file-pdf"></i> Resume
         </a>
       </div>
-<a href="assets/resume/AKASH.A resume.pdf" 
-   target="_blank" 
-   class="resume-btn">
-   📄 View Resume
-</a>
     </div>
-  </div>
-</section>
 
-<!-- ABOUT -->
-<section id="about">
-  <div class="content-box">
-    <h2 class="glow">About Me</h2>
-    <p>
-      Cybersecurity professional specializing in penetration testing,
-      vulnerability assessments, network security, and incident response.
-      Passionate about strengthening digital defenses and continuously
-      learning advanced security techniques.
-    </p>
-  </div>
-</section>
+    <!-- Floating decorations -->
+    <div class="float-obj hex hex-1"></div>
+    <div class="float-obj hex hex-2"></div>
+    <div class="float-obj ring ring-1"></div>
+    <div class="float-obj ring ring-2"></div>
+  </section>
 
-<!-- SERVICES -->
-<section id="services">
-  <div class="content-box">
-    <h2 class="glow">Services</h2>
-    <ul>
-      <li>Penetration Testing & Vulnerability Assessment</li>
-      <li>Network Security Consulting</li>
-      <li>Incident Response Assistance</li>
-      <li>Cyber Awareness Training</li>
-    </ul>
-  </div>
-</section>
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="section-header reveal">
+      <p class="section-tag">Module_01</p>
+      <h2 class="section-title">About <span>//</span> Profile</h2>
+    </div>
+    <div class="about-grid reveal">
+      <div class="about-text">
+        <p>
+          A <strong>Cybersecurity Researcher</strong> specializing in penetration testing,
+          vulnerability assessments, network security, and incident response. Passionate about
+          strengthening digital defenses and continuously learning advanced security techniques.
+        </p>
+        <p>
+          With expertise spanning <strong>web, network & system penetration testing</strong>,
+          <strong>SIEM tools & log monitoring</strong>, and <strong>incident response</strong>,
+          I help identify and eliminate threats before adversaries can exploit them.
+        </p>
+        <p>
+          Currently exploring advanced offensive security techniques, cloud security, and
+          building automated vulnerability detection pipelines.
+        </p>
+      </div>
+      <div class="about-stats">
+        <div class="panel stat-box">
+          <div class="stat-num" data-count="2">0</div>
+          <div class="stat-label">Projects</div>
+        </div>
+        <div class="panel stat-box">
+          <div class="stat-num" data-count="4">0</div>
+          <div class="stat-label">Certifications</div>
+        </div>
+        <div class="panel stat-box">
+          <div class="stat-num" data-count="2">0</div>
+          <div class="stat-label">Internships</div>
+        </div>
+        <div class="panel stat-box">
+          <div class="stat-num" data-count="1">0</div>
+          <div class="stat-label">Yrs Experience</div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-<!-- SKILLS -->
-<section id="skills">
-  <div class="content-box">
-    <h2 class="glow">Skills</h2>
-    <ul>
-      <li>Web, Network & System Penetration Testing</li>
-      <li>SIEM Tools & Log Monitoring</li>
-      <li>Python & MySQL</li>
-      <li>Incident Response & Threat Mitigation</li>
-    </ul>
-  </div>
-</section>
+  <!-- SERVICES -->
+  <section id="services">
+    <div class="section-header reveal">
+      <p class="section-tag">Module_02</p>
+      <h2 class="section-title">Services <span>//</span> Offerings</h2>
+    </div>
+    <div class="services-grid">
+      <div class="panel service-card reveal">
+        <div class="service-icon"><i class="fas fa-bug"></i></div>
+        <h3>Penetration Testing</h3>
+        <p>Web, network, and system penetration testing with detailed vulnerability assessment reports and remediation guidance.</p>
+      </div>
+      <div class="panel service-card reveal">
+        <div class="service-icon"><i class="fas fa-network-wired"></i></div>
+        <h3>Network Security Consulting</h3>
+        <p>Analysis of network architecture, firewall rules, and traffic patterns to identify and close security gaps.</p>
+      </div>
+      <div class="panel service-card reveal">
+        <div class="service-icon"><i class="fas fa-shield-alt"></i></div>
+        <h3>Incident Response</h3>
+        <p>Rapid identification, containment, and eradication of security incidents with post-incident analysis and reporting.</p>
+      </div>
+      <div class="panel service-card reveal">
+        <div class="service-icon"><i class="fas fa-graduation-cap"></i></div>
+        <h3>Cyber Awareness Training</h3>
+        <p>Structured training programs to educate teams on phishing, social engineering, and secure digital practices.</p>
+      </div>
+    </div>
+  </section>
 
-<!-- PROJECTS -->
-<section id="projects">
-  <div class="content-box">
-    <h2 class="glow">Projects</h2>
+  <!-- SKILLS -->
+  <section id="skills">
+    <div class="section-header reveal">
+      <p class="section-tag">Module_03</p>
+      <h2 class="section-title">Skills <span>//</span> Arsenal</h2>
+    </div>
+    <div class="skills-layout">
+      <div class="reveal">
+        <div class="skill-category">
+          <div class="skill-cat-title">// Core Security Skills</div>
+          <div class="skill-item">
+            <span class="skill-name">Web Penetration Testing</span>
+            <div class="skill-bar-wrap"><div class="skill-bar" data-width="88"></div></div>
+            <span class="skill-pct">88%</span>
+          </div>
+          <div class="skill-item">
+            <span class="skill-name">Network & System Pentest</span>
+            <div class="skill-bar-wrap"><div class="skill-bar" data-width="82"></div></div>
+            <span class="skill-pct">82%</span>
+          </div>
+          <div class="skill-item">
+            <span class="skill-name">SIEM & Log Monitoring</span>
+            <div class="skill-bar-wrap"><div class="skill-bar" data-width="78"></div></div>
+            <span class="skill-pct">78%</span>
+          </div>
+          <div class="skill-item">
+            <span class="skill-name">Incident Response</span>
+            <div class="skill-bar-wrap"><div class="skill-bar" data-width="80"></div></div>
+            <span class="skill-pct">80%</span>
+          </div>
+          <div class="skill-item">
+            <span class="skill-name">Threat Mitigation</span>
+            <div class="skill-bar-wrap"><div class="skill-bar" data-width="75"></div></div>
+            <span class="skill-pct">75%</span>
+          </div>
+        </div>
+      </div>
+      <div class="reveal">
+        <div class="skill-category">
+          <div class="skill-cat-title">// Programming & Cloud</div>
+          <div class="skill-item">
+            <span class="skill-name">Python</span>
+            <div class="skill-bar-wrap"><div class="skill-bar" data-width="80"></div></div>
+            <span class="skill-pct">80%</span>
+          </div>
+          <div class="skill-item">
+            <span class="skill-name">MySQL</span>
+            <div class="skill-bar-wrap"><div class="skill-bar" data-width="70"></div></div>
+            <span class="skill-pct">70%</span>
+          </div>
+          <div class="skill-item">
+            <span class="skill-name">AWS / Azure Cloud</span>
+            <div class="skill-bar-wrap"><div class="skill-bar" data-width="72"></div></div>
+            <span class="skill-pct">72%</span>
+          </div>
+          <div class="skill-item">
+            <span class="skill-name">HTML / CSS / JS</span>
+            <div class="skill-bar-wrap"><div class="skill-bar" data-width="75"></div></div>
+            <span class="skill-pct">75%</span>
+          </div>
+        </div>
+        <div class="skill-category" style="margin-top:32px;">
+          <div class="skill-cat-title">// Tools</div>
+          <div class="skill-tools">
+            <span class="tool-badge">Kali Linux</span>
+            <span class="tool-badge">Burp Suite</span>
+            <span class="tool-badge">Nmap</span>
+            <span class="tool-badge">Metasploit</span>
+            <span class="tool-badge">Wireshark</span>
+            <span class="tool-badge">Splunk</span>
+            <span class="tool-badge">Nessus</span>
+            <span class="tool-badge">Python</span>
+            <span class="tool-badge">Flask</span>
+            <span class="tool-badge">Three.js</span>
+            <span class="tool-badge">AWS</span>
+            <span class="tool-badge">Azure</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
+  <!-- PROJECTS -->
+  <section id="projects">
+    <div class="section-header reveal">
+      <p class="section-tag">Module_04</p>
+      <h2 class="section-title">Projects <span>//</span> Operations</h2>
+    </div>
     <div class="projects-grid">
 
-      <!-- Project 1 -->
-      <div class="project-card">
-        <h3>Cybersecurity Portfolio Website</h3>
-        <p>
-          Designed and developed a fully interactive cybersecurity portfolio 
-          featuring 3D background, particle network, console simulation,
-          and animated UI effects.
+      <div class="panel project-card reveal">
+        <p class="project-id">[ OP-001 ]</p>
+        <h3 class="project-title">Cybersecurity Portfolio Website</h3>
+        <p class="project-desc">
+          Designed and developed a fully interactive cybersecurity portfolio featuring 3D background,
+          particle network, console simulation, and animated UI effects.
         </p>
-        <p class="tech">
-          HTML • CSS • JavaScript • Three.js
-        </p>
-<a href="assets/projects/Cybersecurity_Portfolio_Project_Report.pdf" 
-  target="_blank" 
-  class="report-link">
-  View Report
-</a>
+        <div class="project-tags">
+          <span class="tag">HTML</span>
+          <span class="tag">CSS</span>
+          <span class="tag">JavaScript</span>
+          <span class="tag green">Three.js</span>
+        </div>
+        <a href="assets/projects/Cybersecurity_Portfolio_Project_Report.pdf" target="_blank" class="project-link">View Report</a>
       </div>
 
-      <!-- Project 2 -->
-      <div class="project-card">
-        <h3>SQL Injection Payload Scanner</h3>
-        <p>
-         Designed and deployed a Python-based web application to simulate automated SQL injection detection. Implemented payload-driven testing logic, response-time evaluation, and vulnerability severity scoring to identify potential injection flaws in test environments.
+      <div class="panel project-card reveal">
+        <p class="project-id">[ OP-002 ]</p>
+        <h3 class="project-title">SQL Injection Payload Scanner</h3>
+        <p class="project-desc">
+          Python-based web application to simulate automated SQL injection detection. Implemented
+          payload-driven testing logic, response-time evaluation, and vulnerability severity scoring.
         </p>
-        <p class="tech">
-          Python • Flask • Web Security Testing • Payload Analysis • Render Deployment
-        </p>
-        <a href="assets/projects/SQL_Injection_Scanner_Project_Report.pdf" 
-         target="_blank" 
-         class="report-link">
-         View Report
-      </a>
-
+        <div class="project-tags">
+          <span class="tag">Python</span>
+          <span class="tag">Flask</span>
+          <span class="tag red">Web Security</span>
+          <span class="tag green">Deployed</span>
+        </div>
+        <a href="assets/projects/SQL_Injection_Scanner_Project_Report.pdf" target="_blank" class="project-link">View Report</a>
       </div>
 
-      <!-- Project 3 -->
-      <div class="project-card">
-        <h3>coming soon</h3>
-        <p>
-          
-        </p>
-        <p class="tech">
-      
-        </p>
-        <a href="#" target="_blank">View Details</a>
+      <div class="panel project-card reveal coming-soon-card">
+        <p class="project-id">[ OP-003 ]</p>
+        <h3 class="project-title">Coming Soon <span class="blink">_</span></h3>
+        <p class="project-desc">Next operation is currently in development. Stay tuned for the next deployment.</p>
+        <div class="project-tags">
+          <span class="tag">TBD</span>
+        </div>
       </div>
 
     </div>
-  </div>
-  
-</section>
+  </section>
 
+  <!-- EXPERIENCE -->
+  <section id="experience">
+    <div class="section-header reveal">
+      <p class="section-tag">Module_05</p>
+      <h2 class="section-title">Experience <span>//</span> Missions</h2>
+    </div>
+    <div class="timeline">
+      <div class="timeline-item reveal">
+        <div class="timeline-dot"></div>
+        <div class="panel timeline-content">
+          <p class="timeline-org">Offenso Hackers Academy</p>
+          <h3 class="timeline-role">Cybersecurity Student Trainee</h3>
+          <p class="timeline-desc">Hands-on training in ethical hacking, penetration testing methodologies, and real-world attack simulation scenarios.</p>
+        </div>
+      </div>
+      <div class="timeline-item reveal">
+        <div class="timeline-dot"></div>
+        <div class="panel timeline-content">
+          <p class="timeline-org">Innovation Infotech</p>
+          <h3 class="timeline-role">AWS Internship</h3>
+          <p class="timeline-desc">Practical experience in AWS cloud infrastructure, security configurations, IAM policies, and cloud computing fundamentals.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-<!-- EXPERIENCE -->
-<section id="experience">
-  <div class="content-box">
-    <h2 class="glow">Experience</h2>
-    <p>Cybersecurity Student Trainee – Offenso Hackers Academy</p><br>
-    <p>AWS Internship – Innovation infotech </p>
-  </div>
-</section>
+  <!-- CERTIFICATIONS -->
+  <section id="certifications">
+    <div class="section-header reveal">
+      <p class="section-tag">Module_06</p>
+      <h2 class="section-title">Certifications <span>//</span> Clearances</h2>
+    </div>
+    <div class="certs-grid">
 
-<section id="certifications">
-  <div class="content-box">
-    <h2 class="glow">Certifications</h2>
-
-    <div class="cert-grid">
-
-      <div class="cert-card">
-        <h3>BHARATHIYAR UNIVERSITY</h3>
-        <p>BACHELOR OF COMPUTER APPLICATIONS</p>
-        <span>2025</span>
-        <button type="button" class="view-cert-btn view-link"
-          data-img="assets/certificates/demo.jpeg"
-          aria-label="View certificate — BCA provisional certificate">
-          View Certificate
+      <div class="panel cert-card reveal">
+        <div class="cert-badge"><i class="fas fa-graduation-cap"></i></div>
+        <p class="cert-issuer">Bharathiyar University</p>
+        <h3 class="cert-name">Bachelor of Computer Applications</h3>
+        <p class="cert-date">2025</p>
+        <button class="view-cert-btn" data-img="assets/certificates/BCA provisional certificate.jpeg">
+          <i class="fas fa-eye"></i> View Certificate
         </button>
       </div>
 
-      <div class="cert-card">
-        <h3>INTERNSHIP CERTIFICATE</h3>
-        <p>CLOUD COMPUTING</p>
-        <span>2025</span>
-        <button class="view-cert-btn"
-          data-img="assets/certificates/internsip%20aws.jpeg">
-          View Certificate
+      <div class="panel cert-card reveal">
+        <div class="cert-badge"><i class="fas fa-cloud"></i></div>
+        <p class="cert-issuer">Innovation Infotech</p>
+        <h3 class="cert-name">Internship – Cloud Computing</h3>
+        <p class="cert-date">2025</p>
+        <button class="view-cert-btn" data-img="assets/certificates/internsip aws.jpeg">
+          <i class="fas fa-eye"></i> View Certificate
         </button>
       </div>
 
-      <div class="cert-card">
-        <h3>MICROSOFT CERTIFIED</h3>
-        <p>AZURE FUNDAMENTALS</p>
-        <span>2025</span>
-        <button class="view-cert-btn"
-          data-img="assets/certificates/microsoft%20azure.jpeg">
-          View Certificate
+      <div class="panel cert-card reveal">
+        <div class="cert-badge"><i class="fab fa-microsoft"></i></div>
+        <p class="cert-issuer">Microsoft</p>
+        <h3 class="cert-name">Azure Fundamentals</h3>
+        <p class="cert-date">2025</p>
+        <button class="view-cert-btn" data-img="assets/certificates/microsoft azure.jpeg">
+          <i class="fas fa-eye"></i> View Certificate
         </button>
       </div>
 
-      <div class="cert-card">
-        <h3>KERALA POLICE</h3>
-        <p>CYBER SECURITY BOOTCAMP</p>
-        <span>2024</span>
-        <button class="view-cert-btn"
-          data-img="assets/certificates/cybersecurity%20bootcamp.jpeg">
-          View Certificate
+      <div class="panel cert-card reveal">
+        <div class="cert-badge"><i class="fas fa-shield-alt"></i></div>
+        <p class="cert-issuer">Kerala Police</p>
+        <h3 class="cert-name">Cyber Security Bootcamp</h3>
+        <p class="cert-date">2024</p>
+        <button class="view-cert-btn" data-img="assets/certificates/cybersecurity bootcamp.jpeg">
+          <i class="fas fa-eye"></i> View Certificate
         </button>
       </div>
 
     </div>
-  </div>
-</section>
+  </section>
 
-<section id="console">
-  <div class="content-box">
-    <h2 class="glow">Live Security Console</h2>
-    <div class="terminal">
-      <div id="terminal-output"></div>
-      <input type="text" id="terminal-input" placeholder="Type command..." />
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="section-header reveal">
+      <p class="section-tag">Module_07</p>
+      <h2 class="section-title">Contact <span>//</span> Establish Link</h2>
+    </div>
+    <div class="contact-layout">
+      <div class="contact-info reveal">
+        <p>Ready to collaborate on security challenges, discuss threat intelligence, or explore
+          how I can help fortify your organization's defenses.</p>
+        <div class="contact-links">
+          <a href="mailto:akashanoo124@gmail.com" class="contact-link">
+            <span class="contact-link-icon"><i class="fas fa-envelope"></i></span>
+            akashanoo124@gmail.com
+          </a>
+          <a href="https://www.linkedin.com/in/akash-a-820640370" target="_blank" class="contact-link">
+            <span class="contact-link-icon"><i class="fab fa-linkedin"></i></span>
+            linkedin.com/in/akash-a-820640370
+          </a>
+          <a href="https://github.com/akash-a124" target="_blank" class="contact-link">
+            <span class="contact-link-icon"><i class="fab fa-github"></i></span>
+            github.com/akash-a124
+          </a>
+          <a href="https://instagram.com/ak4sh.a" target="_blank" class="contact-link">
+            <span class="contact-link-icon"><i class="fab fa-instagram"></i></span>
+            instagram.com/ak4sh.a
+          </a>
+        </div>
+      </div>
+      <div class="contact-form reveal">
+        <form id="contact-form">
+          <div class="form-group">
+            <label>// Your Identifier</label>
+            <input type="text" name="name" placeholder="Name or Handle" required />
+          </div>
+          <div class="form-group">
+            <label>// Transmission Address</label>
+            <input type="email" name="email" placeholder="your@email.com" required />
+          </div>
+          <div class="form-group">
+            <label>// Message</label>
+            <textarea name="message" placeholder="Describe your mission..." required></textarea>
+          </div>
+          <button type="submit" class="btn-submit">[ TRANSMIT_MESSAGE ]</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <span>© 2025 // AKASH A</span>
+    <span>CYBERSECURITY_RESEARCHER</span>
+    <span>ALL_SYSTEMS_NOMINAL <span class="blink">|</span></span>
+  </footer>
+
+  <!-- CERTIFICATE MODAL -->
+  <div id="cert-modal" class="cert-modal-overlay">
+    <div class="cert-modal-box">
+      <button id="close-cert"><i class="fas fa-times"></i></button>
+      <img id="cert-modal-img" src="" alt="Certificate" />
     </div>
   </div>
-</section>
 
-<!-- CONTACT -->
-<section id="contact">
-  <div class="content-box">
-    <h2 class="glow">Contact Me</h2>
-
-    <form id="contact-form">
-      <input type="text" name="name" placeholder="Your Name" required>
-      <input type="email" name="email" placeholder="Your Email" required>
-      <textarea name="message" placeholder="Your Message" required></textarea>
-      <button type="submit">Send Message</button>
-    </form>
-
-  </div>
-</section>
-
-
-<script src="script.js"></script>
-<!-- Certificate Modal -->
-<div id="cert-modal">
-  <span id="close-cert">&times;</span>
-  <img id="cert-modal-img">
-</div>
+  <!-- Scripts -->
+  <script src="js/script.js"></script>
 </body>
 </html>
-
