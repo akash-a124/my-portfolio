@@ -1,488 +1,280 @@
-const isMobile = window.innerWidth < 768;
-/* ================= MATRIX ================= */
-const canvas = document.getElementById("matrixCanvas");
-const ctx = canvas.getContext("2d");
+/* =============================================
+   AKASH A — CYBERSECURITY PORTFOLIO
+   script.js
+   ============================================= */
 
-canvas.height = window.innerHeight;
-canvas.width = window.innerWidth;
+/* ---- SCROLL PROGRESS BAR ---- */
+(function () {
+  const bar = document.createElement('div');
+  bar.id = 'scroll-progress';
+  document.body.prepend(bar);
 
-const letters = "01";
-const fontSize = 14;
-const columns = canvas.width / fontSize;
-const drops = Array(Math.floor(columns)).fill(1);
-
-function draw() {
-  ctx.fillStyle = "rgba(5, 8, 22, 0.12)";
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-  ctx.fillStyle = "rgba(0, 247, 255, 0.25)";
-  ctx.font = fontSize + "px monospace";
-
-  for (let i = 0; i < drops.length; i++) {
-    const text = letters.charAt(Math.floor(Math.random() * letters.length));
-    ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-
-    if (drops[i] * fontSize > canvas.height && Math.random() > 0.975)
-      drops[i] = 0;
-
-    drops[i]++;
-  }
-}
-
-setInterval(draw, 33);
-
-window.addEventListener("resize", () => {
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
-});
-
-/* ================= SECTION FADE ================= */
-const sections = document.querySelectorAll("section");
-
-function revealSection() {
-  const trigger = window.innerHeight * 0.85;
-  sections.forEach(section => {
-    if (section.getBoundingClientRect().top < trigger) {
-      section.classList.add("show");
-    }
+  window.addEventListener('scroll', () => {
+    const scrolled = window.scrollY;
+    const maxScroll = document.body.scrollHeight - window.innerHeight;
+    bar.style.width = ((scrolled / maxScroll) * 100) + '%';
   });
-}
-window.addEventListener("scroll", revealSection);
-revealSection();
+})();
 
-/* ================= ACTIVE NAV ================= */
-const navLinks = document.querySelectorAll("nav a");
+/* ---- CUSTOM CURSOR ---- */
+(function () {
+  const cursor    = document.getElementById('cursor');
+  const cursorRing = document.getElementById('cursorRing');
+  if (!cursor || !cursorRing) return;
 
-window.addEventListener("scroll", () => {
-  let current = "";
-  sections.forEach(section => {
-    if (scrollY >= section.offsetTop - 150) {
-      current = section.getAttribute("id");
-    }
+  let mx = 0, my = 0, rx = 0, ry = 0;
+
+  document.addEventListener('mousemove', e => {
+    mx = e.clientX;
+    my = e.clientY;
+    cursor.style.left = mx + 'px';
+    cursor.style.top  = my + 'px';
   });
 
-  navLinks.forEach(link => {
-    link.classList.remove("active");
-    if (link.getAttribute("href") === "#" + current) {
-      link.classList.add("active");
-    }
-  });
-});
+  (function animRing() {
+    rx += (mx - rx) * 0.12;
+    ry += (my - ry) * 0.12;
+    cursorRing.style.left = rx + 'px';
+    cursorRing.style.top  = ry + 'px';
+    requestAnimationFrame(animRing);
+  })();
 
-/* ================= PARALLAX ================= */
-const parallax = document.querySelector(".parallax-layer");
-
-document.addEventListener("mousemove", (e) => {
-  const x = (window.innerWidth / 2 - e.clientX) / 30;
-  const y = (window.innerHeight / 2 - e.clientY) / 30;
-  if (parallax) {
-    parallax.style.transform = `rotateY(${x}deg) rotateX(${y}deg)`;
-  }
-});
-
-/* ================= ADVANCED SCROLL REVEAL ================= */
-const revealSections = () => {
-  const triggerPoint = window.innerHeight * 0.85;
-
-  sections.forEach(section => {
-    const sectionTop = section.getBoundingClientRect().top;
-
-    if (sectionTop < triggerPoint) {
-      section.classList.add("show");
-    }
-  });
-};
-
-window.addEventListener("scroll", revealSections);
-revealSections();
-
-
-/* ================= TERMINAL ================= */
-const input = document.getElementById("terminal-input");
-const output = document.getElementById("terminal-output");
-
-if (input) {
-  input.addEventListener("keydown", function(e) {
-    if (e.key === "Enter") {
-      const command = input.value;
-      output.innerHTML += `<div>> ${command}</div>`;
-
-      if (command === "whoami") {
-        output.innerHTML += "<div>Akash A - Cybersecurity Researcher</div>";
-      } else if (command === "skills") {
-        output.innerHTML += "<div>Penetration Testing, SIEM, Python, Incident Response</div>";
-      } else if (command === "clear") {
-        output.innerHTML = "";
-      } else {
-        output.innerHTML += "<div>Command not recognized.</div>";
-      }
-
-      input.value = "";
-      output.scrollTop = output.scrollHeight;
-    }
-  });
-}
-
-/* ================= CURSOR GLOW ================= */
-const glow = document.createElement("div");
-glow.classList.add("cursor-glow");
-document.body.appendChild(glow);
-
-let mouseX = 0, mouseY = 0;
-let glowX = 0, glowY = 0;
-
-document.addEventListener("mousemove", e => {
-  mouseX = e.clientX;
-  mouseY = e.clientY;
-});
-
-function animateGlow() {
-  glowX += (mouseX - glowX) * 0.15;
-  glowY += (mouseY - glowY) * 0.15;
-
-  glow.style.left = glowX + "px";
-  glow.style.top = glowY + "px";
-
-  requestAnimationFrame(animateGlow);
-}
-animateGlow();
-
-/* Glow scale on hover */
-document.querySelectorAll("a").forEach(link => {
-  link.addEventListener("mouseenter", () => {
-    glow.style.transform = "translate(-50%, -50%) scale(1.8)";
-  });
-  link.addEventListener("mouseleave", () => {
-    glow.style.transform = "translate(-50%, -50%) scale(1)";
-  });
-});
-
-/* ================= SMOOTH SCROLL EASING ================= */
-document.querySelectorAll('nav a').forEach(anchor => {
-  anchor.addEventListener('click', function (e) {
-    e.preventDefault();
-
-    const target = document.querySelector(this.getAttribute('href'));
-
-    window.scrollTo({
-      top: target.offsetTop - 80,
-      behavior: "smooth"
+  document.querySelectorAll('a, button, .panel, .tool-badge').forEach(el => {
+    el.addEventListener('mouseenter', () => {
+      cursor.style.width      = '20px';
+      cursor.style.height     = '20px';
+      cursorRing.style.width  = '54px';
+      cursorRing.style.height = '54px';
+    });
+    el.addEventListener('mouseleave', () => {
+      cursor.style.width      = '12px';
+      cursor.style.height     = '12px';
+      cursorRing.style.width  = '36px';
+      cursorRing.style.height = '36px';
     });
   });
-});
+})();
 
-/* ================= SCROLL PROGRESS ================= */
-window.addEventListener("scroll", () => {
-  const scrollTop = window.scrollY;
-  const docHeight = document.body.scrollHeight - window.innerHeight;
-  const progress = (scrollTop / docHeight) * 100;
+/* ---- CANVAS NEURAL NETWORK BACKGROUND ---- */
+(function () {
+  const canvas = document.getElementById('bg-canvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  let W, H, nodes = [];
 
-  document.getElementById("scroll-progress").style.width = progress + "%";
-});
-
-/* ================= PARTICLE NETWORK ================= */
-for (let i = 0; i < 40; i++) {
-  const particle = document.createElement("div");
-  particle.classList.add("particle");
-  particle.style.left = Math.random() * 100 + "vw";
-  particle.style.animationDuration = 10 + Math.random() * 20 + "s";
-  document.body.appendChild(particle);
-}
-
-/* ================= RADAR CLICK ================= */
-document.addEventListener("click", e => {
-  const ripple = document.createElement("div");
-  ripple.classList.add("click-ripple");
-  ripple.style.left = e.clientX + "px";
-  ripple.style.top = e.clientY + "px";
-  document.body.appendChild(ripple);
-
-  setTimeout(() => {
-    ripple.remove();
-  }, 600);
-});
-
-document.getElementById("ai-assistant").addEventListener("click", () => {
-  alert("AI Assistant Coming Soon 😎");
-});
-
-/*page transition*/
-
-const wipe = document.querySelector(".page-wipe");
-
-document.querySelectorAll("nav a").forEach(link => {
-  link.addEventListener("click", e => {
-    wipe.style.transform = "translateY(0)";
-    setTimeout(() => {
-      wipe.style.transform = "translateY(-100%)";
-    }, 600);
-  });
-});
-
-/* ================= THREE.JS CYBER SPACE ================= */
-
-const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera(
-  75,
-  window.innerWidth / window.innerHeight,
-  0.1,
-  1000
-);
-
-const renderer = new THREE.WebGLRenderer({ alpha: true });
-renderer.setSize(window.innerWidth, window.innerHeight);
-document.getElementById("three-container").appendChild(renderer.domElement);
-
-const geometry = new THREE.BufferGeometry();
-const vertices = [];
-
-for (let i = 0; i < 2000; i++) {
-  vertices.push(
-    (Math.random() - 0.5) * 2000,
-    (Math.random() - 0.5) * 2000,
-    (Math.random() - 0.5) * 2000
-  );
-}
-
-geometry.setAttribute(
-  "position",
-  new THREE.Float32BufferAttribute(vertices, 3)
-);
-
-const material = new THREE.PointsMaterial({
-  color: 0x00f7ff,
-  size: 2
-});
-
-const particles = new THREE.Points(geometry, material);
-scene.add(particles);
-
-camera.position.z = 500;
-
-function animateThree() {
-  requestAnimationFrame(animateThree);
-  particles.rotation.y += 0.0008;
-  particles.rotation.x += 0.0004;
-  renderer.render(scene, camera);
-}
-
-animateThree();
-
-document.addEventListener("mousemove", e => {
-  camera.position.x = (e.clientX - window.innerWidth / 2) * 0.002;
-  camera.position.y = -(e.clientY - window.innerHeight / 2) * 0.002;
-});
-
-
-window.addEventListener("resize", () => {
-  renderer.setSize(window.innerWidth, window.innerHeight);
-  camera.aspect = window.innerWidth / window.innerHeight;
-  camera.updateProjectionMatrix();
-});
-/*chatbot*/
-const chatInput = document.getElementById("chat-input");
-const chatMessages = document.getElementById("chat-messages");
-
-if (chatInput && chatMessages) {
-  chatInput.addEventListener("keydown", e => {
-    if (e.key === "Enter") {
-      const msg = chatInput.value.toLowerCase();
-
-      chatMessages.innerHTML += `<div>> ${msg}</div>`;
-
-      let response = "";
-
-      if (msg.includes("services")) {
-        response = "I provide penetration testing, vulnerability assessment and security consulting.";
-      } else if (msg.includes("skills")) {
-        response = "My skills include SIEM tools, Python, incident response and network security.";
-      } else if (msg.includes("contact")) {
-        response = "You can contact me via email or LinkedIn.";
-      } else {
-        response = "AI Assistant is currently in demo mode.";
-      }
-
-      chatMessages.innerHTML += `<div>AI: ${response}</div>`;
-      chatInput.value = "";
-      chatMessages.scrollTop = chatMessages.scrollHeight;
-    }
-  });
-}
-/*typing booth*/
-const intro = document.getElementById("intro-screen");
-if (intro) {
-  let text = "Initializing Secure Protocol...\nAccessing Encrypted Network...\nAccess Granted ✔";
-  let i = 0;
-
-  intro.innerHTML = "";
-
-  function typeBoot() {
-    if (i < text.length) {
-      intro.innerHTML += text.charAt(i) === "\n" ? "<br>" : text.charAt(i);
-      i++;
-      setTimeout(typeBoot, 40);
-    }
+  function resize() {
+    W = canvas.width  = window.innerWidth;
+    H = canvas.height = window.innerHeight;
   }
+  resize();
+  window.addEventListener('resize', () => { resize(); initNodes(); });
 
-  typeBoot();
-}
-
-/* ================= PARTICLE NETWORK ================= */
-
-const networkCanvas = document.getElementById("networkCanvas");
-const nCtx = networkCanvas.getContext("2d");
-
-networkCanvas.width = window.innerWidth;
-networkCanvas.height = window.innerHeight;
-
-let particlesArray = [];
-const numParticles = 80;
-
-class Particle {
-  constructor() {
-    this.x = Math.random() * networkCanvas.width;
-    this.y = Math.random() * networkCanvas.height;
-    this.size = 2;
-    this.speedX = (Math.random() - 0.5) * 0.5;
-    this.speedY = (Math.random() - 0.5) * 0.5;
-  }
-
-  update() {
-    this.x += this.speedX;
-    this.y += this.speedY;
-
-    if (this.x < 0 || this.x > networkCanvas.width) this.speedX *= -1;
-    if (this.y < 0 || this.y > networkCanvas.height) this.speedY *= -1;
-  }
-
-  draw() {
-    nCtx.fillStyle = "#00f7ff";
-    nCtx.beginPath();
-    nCtx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-    nCtx.fill();
-  }
-}
-
-function initParticles() {
-  particlesArray = [];
-  for (let i = 0; i < numParticles; i++) {
-    particlesArray.push(new Particle());
-  }
-}
-
-function connectParticles() {
-  for (let a = 0; a < particlesArray.length; a++) {
-    for (let b = a; b < particlesArray.length; b++) {
-      let dx = particlesArray[a].x - particlesArray[b].x;
-      let dy = particlesArray[a].y - particlesArray[b].y;
-      let distance = dx * dx + dy * dy;
-
-      if (distance < 15000) {
-        nCtx.strokeStyle = "rgba(0,247,255,0.1)";
-        nCtx.lineWidth = 1;
-        nCtx.beginPath();
-        nCtx.moveTo(particlesArray[a].x, particlesArray[a].y);
-        nCtx.lineTo(particlesArray[b].x, particlesArray[b].y);
-        nCtx.stroke();
-      }
-    }
-  }
-}
-
-function animateNetwork() {
-  nCtx.clearRect(0, 0, networkCanvas.width, networkCanvas.height);
-
-  particlesArray.forEach(p => {
-    p.update();
-    p.draw();
-  });
-
-  connectParticles();
-  requestAnimationFrame(animateNetwork);
-}
-
-initParticles();
-animateNetwork();
-
-window.addEventListener("resize", () => {
-  networkCanvas.width = window.innerWidth;
-  networkCanvas.height = window.innerHeight;
-  initParticles();
-});
-
-/* ================= EMAILJS CONTACT ================= */
-/* ================= EMAILJS CONTACT FIX ================= */
-
-document.addEventListener("DOMContentLoaded", function () {
-
-  const form = document.getElementById("contact-form");
-
-  if (!form) return; // safety check
-
-  emailjs.init("ti6FxsVrbDXrs05mR"); // replace with your real key
-
-  form.addEventListener("submit", function (e) {
-    e.preventDefault(); // 🚨 THIS STOPS PAGE REFRESH
-
-    emailjs.sendForm("service_68j4h85", "ejs-test-mail-service__", this)
-      .then(function () {
-        alert("Message sent successfully!");
-        form.reset();
-      })
-      .catch(function (error) {
-        console.error("EmailJS Error:", error);
-        alert("Failed to send message.");
+  function initNodes() {
+    nodes = [];
+    const count = Math.floor((W * H) / 16000);
+    for (let i = 0; i < count; i++) {
+      nodes.push({
+        x:  Math.random() * W,
+        y:  Math.random() * H,
+        vx: (Math.random() - 0.5) * 0.35,
+        vy: (Math.random() - 0.5) * 0.35,
+        r:  Math.random() * 1.6 + 0.4
       });
+    }
+  }
+  initNodes();
 
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+
+    for (let i = 0; i < nodes.length; i++) {
+      for (let j = i + 1; j < nodes.length; j++) {
+        const dx   = nodes[i].x - nodes[j].x;
+        const dy   = nodes[i].y - nodes[j].y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < 140) {
+          ctx.beginPath();
+          ctx.strokeStyle = `rgba(0,245,255,${0.12 * (1 - dist / 140)})`;
+          ctx.lineWidth   = 0.5;
+          ctx.moveTo(nodes[i].x, nodes[i].y);
+          ctx.lineTo(nodes[j].x, nodes[j].y);
+          ctx.stroke();
+        }
+      }
+    }
+
+    nodes.forEach(n => {
+      ctx.beginPath();
+      ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(0,245,255,0.55)';
+      ctx.fill();
+
+      n.x += n.vx;
+      n.y += n.vy;
+      if (n.x < 0 || n.x > W) n.vx *= -1;
+      if (n.y < 0 || n.y > H) n.vy *= -1;
+    });
+
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+/* ---- ANTI-GRAVITY FLOATING PARTICLES ---- */
+(function () {
+  const colors = ['#00f5ff', '#00ff88', '#ff003c'];
+
+  function spawn() {
+    const p = document.createElement('div');
+    p.className = 'particle';
+    p.style.cssText = `
+      left: ${Math.random() * 100}vw;
+      bottom: 0;
+      --dx: ${(Math.random() - 0.5) * 220}px;
+      animation-duration: ${4 + Math.random() * 7}s;
+      animation-delay: ${Math.random() * 2}s;
+      background: ${colors[Math.floor(Math.random() * colors.length)]};
+      box-shadow: 0 0 6px currentColor;
+      width:  ${1 + Math.random() * 2}px;
+      height: ${1 + Math.random() * 2}px;
+    `;
+    document.body.appendChild(p);
+    setTimeout(() => p.remove(), 11000);
+  }
+
+  setInterval(spawn, 220);
+})();
+
+/* ---- SCROLL REVEAL ---- */
+(function () {
+  const elements = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  elements.forEach(el => observer.observe(el));
+})();
+
+/* ---- SKILL BARS ---- */
+(function () {
+  const section = document.getElementById('skills');
+  if (!section) return;
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        section.querySelectorAll('.skill-bar').forEach(bar => {
+          setTimeout(() => { bar.style.width = bar.dataset.width + '%'; }, 300);
+        });
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.25 });
+
+  observer.observe(section);
+})();
+
+/* ---- COUNT-UP ANIMATION ---- */
+(function () {
+  const section = document.getElementById('about');
+  if (!section) return;
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        section.querySelectorAll('[data-count]').forEach(el => {
+          const target = parseInt(el.dataset.count);
+          let cur = 0;
+          const step = Math.ceil(target / 40);
+          const timer = setInterval(() => {
+            cur = Math.min(cur + step, target);
+            el.textContent = cur + '+';
+            if (cur >= target) clearInterval(timer);
+          }, 45);
+        });
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.4 });
+
+  observer.observe(section);
+})();
+
+/* ---- MOBILE NAV TOGGLE ---- */
+(function () {
+  const toggle = document.getElementById('navToggle');
+  const links  = document.querySelector('.nav-links');
+  if (!toggle || !links) return;
+
+  toggle.addEventListener('click', () => {
+    links.classList.toggle('open');
   });
 
-});
+  links.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => links.classList.remove('open'));
+  });
+})();
 
-/* ================= CERTIFICATE VIEW MODAL ================= */
+/* ---- CERTIFICATE MODAL ---- */
+(function () {
+  const modal   = document.getElementById('cert-modal');
+  const modalImg = document.getElementById('cert-modal-img');
+  const closeBtn = document.getElementById('close-cert');
+  if (!modal) return;
 
-document.addEventListener("DOMContentLoaded", () => {
-  const modal = document.getElementById("cert-modal");
-  const modalImg = document.getElementById("cert-modal-img");
-  const closeBtn = document.getElementById("close-cert");
-
-  if (!modal || !modalImg) return;
-
-  // support both buttons and anchor links that should open the modal
-  document.querySelectorAll(".view-cert-btn, .view-link").forEach(el => {
-    el.addEventListener("click", function (e) {
-      if (this.tagName.toLowerCase() === 'a') e.preventDefault();
-      const src = this.getAttribute("data-img") || this.getAttribute('href');
+  document.querySelectorAll('.view-cert-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const src = btn.dataset.img;
       if (!src) return;
       modalImg.src = src;
-      modal.style.display = "flex";
+      modal.classList.add('open');
     });
   });
 
-  // show a console error if image fails to load (helps debug missing file)
-  modalImg.addEventListener('error', () => {
-    console.error('Certificate image failed to load:', modalImg.src);
+  function closeModal() { modal.classList.remove('open'); modalImg.src = ''; }
+
+  closeBtn.addEventListener('click', closeModal);
+  modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+})();
+
+/* ---- CONTACT FORM (basic feedback — wire up your own backend/EmailJS) ---- */
+(function () {
+  const form = document.getElementById('contact-form');
+  if (!form) return;
+
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    const btn = form.querySelector('.btn-submit');
+    const original = btn.textContent;
+    btn.textContent = '[ TRANSMISSION_SENT ✓ ]';
+    btn.disabled = true;
+    setTimeout(() => {
+      btn.textContent = original;
+      btn.disabled = false;
+      form.reset();
+    }, 3000);
   });
+})();
 
-  if (closeBtn) {
-    closeBtn.addEventListener("click", () => {
-      modal.style.display = "none";
-    });
-  }
-
-  modal.addEventListener("click", function (e) {
-    if (e.target === modal) {
-      modal.style.display = "none";
+/* ---- NAVBAR SCROLL SHRINK ---- */
+(function () {
+  const nav = document.getElementById('navbar');
+  if (!nav) return;
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 60) {
+      nav.style.background = 'rgba(2,8,16,0.98)';
+      nav.style.paddingTop    = '12px';
+      nav.style.paddingBottom = '12px';
+    } else {
+      nav.style.background = '';
+      nav.style.paddingTop    = '';
+      nav.style.paddingBottom = '';
     }
   });
-});
-
-console.log(this.getAttribute("data-img"));
-
-
-
-
-
-
-
-
-
+})();
