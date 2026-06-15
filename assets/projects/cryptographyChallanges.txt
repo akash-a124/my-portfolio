@@ -1,0 +1,17 @@
+Crypto CTF Project
+
+This project is a collection of custom cryptography-based Capture The
+Flag (CTF) exercises designed to strengthen practical cybersecurity and
+problem-solving skills. It focuses on applying cryptographic concepts
+through interactive puzzles that require participants to analyze encoded
+data, identify hidden patterns, and recover secret information.
+
+The project incorporates techniques such as XOR operations, Base64
+encoding, hexadecimal manipulation, classical ciphers, and multi-step
+decoding processes. It encourages hands-on learning by combining logical
+reasoning with scripting and cryptanalysis.
+
+Developed as part of a cybersecurity portfolio, this repository
+demonstrates an understanding of cryptographic principles, challenge
+design, and secure coding practices while providing an engaging learning
+experience for CTF enthusiasts and aspiring security professionals.
